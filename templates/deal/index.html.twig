@@ -3,9 +3,6 @@
 {% block title %}{{ site.name }}{% endblock %}
 
 {% block body %}
-    {% for success in app.flashes('success') %}
-            {{ success }}
-    {% endfor %}
     {% for category in categories %}
         <h1>{{ category.name|capitalize }} :</h1>
         {% if category.deals|length > 0 %}
