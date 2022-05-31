@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Deal;
+use App\Form\DealType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,5 +43,24 @@ class DealController extends AbstractController
         $deal->setEnabled(!$deal->isEnabled());
         $registry->getManager()->flush();
         return $this->redirectToRoute('deal_list');
+    }
+
+    #[Route('/deal/add', name: 'deal_add', methods: ['GET', 'POST'])]
+    public function add(Request $request, ManagerRegistry $registry): Response
+    {
+        $deal = new Deal();
+        $form = $this->createForm(DealType::class, $deal);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Deal added');
+            $deal->setEnabled(false);
+            $registry->getManager()->persist($deal);
+            $registry->getManager()->flush();
+            return $this->redirectToRoute('deal_list');
+        }
+        return $this->render('deal/add.html.twig', [
+            'controller_name' => 'DealController',
+            'form' => $form->createView(),
+        ]);
     }
 }

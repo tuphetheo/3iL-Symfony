@@ -6,6 +6,7 @@ use App\Repository\DealRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DealRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -29,6 +30,7 @@ class Deal
     private $updated_at;
 
     #[ORM\Column(type: 'float', scale: 2)]
+    #[Assert\GreaterThan(0, message: "Le prix doit être supérieur à 0")]
     private $price;
 
     #[ORM\Column(type: 'boolean')]
