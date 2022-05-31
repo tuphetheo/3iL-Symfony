@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Deal;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,5 +25,17 @@ class DealController extends AbstractController
         return $this->render('deal/show.html.twig', [
             'controller_name' => 'DealController',
         ]);
+    }
+
+    #[Route('/deal/toggle/{id}', name: 'deal_toggle', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function toggleEnableAction(int $id, ManagerRegistry $registry): Response
+    {
+        $deal = $registry->getRepository(Deal::class)->find($id);
+        if (!$deal) {
+            throw $this->createNotFoundException('Deal not found');
+        }
+        $deal->setEnabled(!$deal->isEnabled());
+        $registry->getManager()->flush();
+        return $this->redirectToRoute('deal_list');
     }
 }
