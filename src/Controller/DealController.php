@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Deal;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,10 +13,13 @@ class DealController extends AbstractController
 {
     #[Route('/', name: 'homepage', methods: ['GET'])]
     #[Route('/deal/list', name: 'deal_list', methods: ['GET'])]
-    public function index(): Response
+    public function index(ManagerRegistry $registry): Response
     {
+        $categories = $registry->getRepository(Category::class)->findAll();
+
         return $this->render('deal/index.html.twig', [
             'controller_name' => 'DealController',
+            'categories' => $categories,
         ]);
     }
 
