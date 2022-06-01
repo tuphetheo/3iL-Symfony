@@ -21,23 +21,38 @@ class DealType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom',
                 'required' => true,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'required' => true,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('price', MoneyType::class, [
                 'label' => 'Prix',
                 'required' => true,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('categories', EntityType::class, [
                 'label' => 'Catégories',
                 'class' => Category::class,
                 'multiple' => true,
                 'expanded' => true,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
             ]);
     }
 
@@ -45,6 +60,9 @@ class DealType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Deal::class,
+            'attr' => [
+                'class' => 'form-control'
+            ]
         ]);
     }
 }

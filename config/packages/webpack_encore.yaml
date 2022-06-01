@@ -24,7 +24,7 @@ webpack_encore:
   strict_mode: false
 
     # If you have multiple builds:
-    # builds:
+  # builds:
   # pass "frontend" as the 3rg arg to the Twig functions
   # {{ encore_entry_script_tags('entry1', null, 'frontend') }}
 
