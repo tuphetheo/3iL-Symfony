@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\DealRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -44,7 +45,7 @@ class Deal
         $this->categories = new ArrayCollection();
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->name;
     }
@@ -78,7 +79,7 @@ class Deal
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->created_at;
     }
@@ -86,12 +87,12 @@ class Deal
     #[ORM\PrePersist]
     public function setCreatedAt(): self
     {
-        $this->created_at = new \DateTimeImmutable();
+        $this->created_at = new DateTimeImmutable();
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updated_at;
     }
@@ -99,7 +100,7 @@ class Deal
     #[ORM\PreUpdate]
     public function setUpdatedAt(): self
     {
-        $this->updated_at = new \DateTimeImmutable();
+        $this->updated_at = new DateTimeImmutable();
 
         return $this;
     }

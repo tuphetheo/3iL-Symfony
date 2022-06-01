@@ -26,7 +26,7 @@ class Category
         $this->deals = new ArrayCollection();
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->name;
     }

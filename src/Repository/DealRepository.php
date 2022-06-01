@@ -39,6 +39,10 @@ class DealRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Return all enabled deals.
+     * @return array<Deal>
+     */
     public function getEnabledDeals(): array
     {
         return $this->createQueryBuilder('d')
@@ -46,8 +50,7 @@ class DealRepository extends ServiceEntityRepository
             ->setParameter('enabled', true)
             ->orderBy('d.id', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
 //    /**

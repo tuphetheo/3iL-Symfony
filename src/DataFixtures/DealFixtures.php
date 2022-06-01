@@ -34,7 +34,7 @@ class DealFixtures extends Fixture
             /**
              * @var Category $category
              */
-            $category = $this->getReference(CategoryFixtures::CATEGORIES_NAMES[round($i/2, 0, PHP_ROUND_HALF_DOWN)]);
+            $category = $this->getReference(CategoryFixtures::CATEGORIES_NAMES[round($i / 2, 0, PHP_ROUND_HALF_DOWN)]);
             $deal->addCategory($category);
             $manager->persist($deal);
         }
